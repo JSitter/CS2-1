@@ -7,7 +7,6 @@ import unittest
 
 
 class IsSortedTest(unittest.TestCase):
-
     def test_is_sorted_on_sorted_integers(self):
         # Positive test cases (examples) with lists of sorted integers
         assert is_sorted([]) is True  # Empty lists are vacuously sorted
@@ -214,7 +213,7 @@ def get_sort_function():
 
 
 # If using PyTest, change this variable to the sort function you want to test
-sort = merge_sort
+sort = quick_sort
 
 
 if __name__ == '__main__':
