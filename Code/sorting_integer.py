@@ -59,7 +59,9 @@ def bucket_sort(numbers, num_buckets=10):
 
     # Loop over given numbers and place each item in appropriate bucket
     for value in numbers:
-      bucket_list[value%num_buckets].append(value)
+      for i in range(num_buckets):
+        if (value < (i + 1) * (bucket_range / num_buckets)):
+          bucket_list[i-1].append(value)
     # Sort each bucket using any sorting algorithm (recursive or another)
     for num_list in bucket_list:
       num_list.sort()
