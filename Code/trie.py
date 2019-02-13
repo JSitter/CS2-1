@@ -49,15 +49,15 @@ class Trie:
           return False
 
 
-  def find_similar(self, word_start):
+  def autocomplete(self, prefix):
     cur_node = self.root
     words = []
-    for char in word_start:
+    for char in prefix:
       char_index = self.char_to_index(char)
       if cur_node.children[char_index]:
         cur_node = cur_node.children[char_index]
       else:
-        # Haven't gotten to end of word_start therefore no similar words exist
+        # Haven't gotten to end of prefix therefore no similar words exist
         return words
     # Find all child words
     for char in cur_node.children:

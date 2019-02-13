@@ -46,6 +46,8 @@ def main():
     """Read command-line arguments and test autocomplete algorithms."""
     if len(sys.argv) == 1:
         script = sys.argv[0]  # Get script file name
+        print("Hello")
+        print(script)
         print('Usage: {} prefix'.format(script))
         print('Test autocomplete with dictionary words and the given prefix')
         print('Example: {} axl'.format(script))
