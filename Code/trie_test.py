@@ -15,16 +15,17 @@ def test_search():
   assert t.search("Astral")
   assert not t.search("Papaya")
 
-def test_find_similar():
+def test_autocomplete():
   t = Trie()
-  t.insert("Rollercoaster")
-  t.insert("Roll")
-  t.insert("Rollerama")
-  t.insert("Ticonderoga")
-  t.insert("aunt")
-  t.insert("ant")
-  t.insert("anteater")
+  t.insert("rollercoaster")
+  t.insert("roll")
+  t.insert("rollerama")
+  t.insert("ticonderoga")
 
-  values = t.autocomplete("Roll")
-  for value in ['Rollercoaster', 'Rollerama']:
+  values = t.autocomplete("roll")
+  for value in ['rollercoaster', 'rollerama']:
+    assert value in values
+  
+  values = t.autocomplete("ro")
+  for value in ['roll', 'rollercoaster', 'rollerama']:
     assert value in values
