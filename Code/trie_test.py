@@ -20,6 +20,6 @@ def test_find_similar():
   t.insert("Rollercoaster")
   t.insert("Roll")
   t.insert("Rollerama")
-  values = t.find_similar("Roll")
-  for value in ['rollercoaster', 'roll', 'rollerama']:
+  values = t.autocomplete("Roll")
+  for value in ['rollercoaster', 'rollerama']:
     assert value in values
