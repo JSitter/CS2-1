@@ -39,7 +39,6 @@ class Trie:
         # Character index doesn't exist return false immediately 
         return False
 
-
   def autocomplete(self, prefix):
     cur_node = self.root
     words = []
