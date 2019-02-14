@@ -47,12 +47,17 @@ class Trie:
       else:
         # Haven't gotten to end of prefix therefore no similar words exist
         return words
-    # Find all child words
+    
+    return self.find_child_words(cur_node, prefix)
+     
+  def find_child_words(self, cur_node, prefix):
+    words = []
     for char in cur_node.children:
-      chars = ""
-  
-  def find_all_child_words(self, cur_node, prefix):
-    pass
+      if cur_node.children[char].word_end:
+        words.append("{}{}".format(prefix, char))
+      words = words + self.find_child_words(cur_node.children[char], prefix+char)
+
+    return words
 
 class Trie_Node:
   def __init__(self):
