@@ -36,7 +36,7 @@ class Trie:
           # Not at last character yet
           cur_node = cur_node.children[char]
       else:
-        # Character index doesn't exist return false immediately 
+        # Character index doesn't exist -- return false immediately 
         return False
 
   def autocomplete(self, prefix):
