@@ -1,9 +1,11 @@
 #! python3
 
 class Trie:
-  def __init__(self):
+  def __init__(self, vocabulary=[]):
     self.root = Trie_Node()
-  
+    for word in vocabulary:
+      self.insert(word)
+
   def insert(self, word):
     cur_node = self.root
     for index, char in enumerate(word):
