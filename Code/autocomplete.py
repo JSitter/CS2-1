@@ -39,7 +39,7 @@ def autocomplete(prefix, structure, algorithm='linear_search'):
         return [word for word in structure if word.startswith(prefix)]
     elif algorithm == 'trie':
         # Search the trie structure for the prefix
-        return structure.search(prefix)
+        return structure.autocomplete(prefix)
 
 
 def main():
@@ -62,19 +62,21 @@ def main():
         # Test autocomplete with dictionary words and the given prefix
         prefix = sys.argv[1]
         vocabulary = get_lines('/usr/share/dict/words')
+        algorithm = 'trie'  # 'linear_search'
 
         # Start the clock for benchmarking
         start_time = time.time()
 
         # Set up autocomplete and mark the clock
-        structure = autocomplete_setup(vocabulary)
+        structure = autocomplete_setup(vocabulary, algorithm)
         setup_time = time.time()
 
         # Run autocomplete and mark the clock
-        completions = autocomplete(prefix, structure)
+        completions = autocomplete(prefix, structure, algorithm)
         end_time = time.time()
 
         print('Vocabulary size: {}'.format(len(vocabulary)))
+        print('Number of completions: {}'.format(len(completions)))
         print('Completions of {}: {}'.format(prefix, ', '.join(completions)))
         print()
         print('Initial setup time: {:.6f} sec'.format(setup_time - start_time))
@@ -85,24 +87,27 @@ def main():
         # Open the given vocabulary and prefixes files
         vocabulary = get_lines(sys.argv[2])
         prefixes = get_lines(sys.argv[1])
+        # algorithm = sys.argv[3] if len(sys.argv) > 3 else 'trie'
+        algorithm = 'trie'  # 'linear_search'
 
         # Start the clock for benchmarking
         start_time = time.time()
 
         # Set up autocomplete and mark the clock
-        structure = autocomplete_setup(vocabulary)
+        structure = autocomplete_setup(vocabulary, algorithm)
         setup_time = time.time()
 
         # Run autocomplete with each prefix
         num_completions = 0
         for prefix in prefixes:
-            completions = autocomplete(prefix, structure)
+            completions = autocomplete(prefix, structure, algorithm)
             num_completions += len(completions)
             # print('Completions of {}: {}'.format(prefix, ', '.join(completions)))
 
         # Mark the clock
         end_time = time.time()
 
+        print('Using algorithm: {}'.format(algorithm))
         print('Vocabulary size: {}'.format(len(vocabulary)))
         print('Found {} total completions of {} prefixes'
               .format(num_completions, len(prefixes)))
