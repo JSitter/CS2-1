@@ -55,36 +55,38 @@ The word `dozy` is left out because it doesn't contain the prefix.
 ## Benchmarks
 The trie data structure is extraordinarily quick to build.
 
-The initial setup using a dictionary of 235,886 words takes a mere 0.000005 sec. 
+The initial setup using a dictionary of 235,886 words takes a few seconds. 
 
-Running the autocomplete function on the built trie is several orders of magnitude slower however. Here are the runtimes for different autocomplete suggestions using the autocomplete benchmarking script included in this repository.
+Running the autocomplete function on the built trie is several orders of magnitude faster however. Here are the runtimes for different autocomplete suggestions using the autocomplete benchmarking script included in this repository.
 
-Running `python autocomplete s` will return every word that begins with s with the following benchmarks:
+Running `python ./autocomplete.py s` will return every word that begins with s with the following benchmarks:
 
 ```
-Initial setup time: 0.000005 sec
-Autocomplete time:  0.032807 sec
-Total time elapsed: 0.032812 sec
+Initial setup time: 2.444795 sec
+Autocomplete time:  0.047886 sec
+Total time elapsed: 2.492681 sec
 ```
 
-Running `python autocomplete xanthod` will output a much smaller list of results as follows:
+Running `python ./autocomplete.py xanthod` will output a much smaller list of results as follows:
 
 ```
 Vocabulary size: 235886
+Number of completions: 4
 Completions of xanthod: xanthoderm, xanthoderma, xanthodont, xanthodontous
 
-Initial setup time: 0.000004 sec
-Autocomplete time:  0.029575 sec
-Total time elapsed: 0.029579 sec
+Initial setup time: 2.502611 sec
+Autocomplete time:  0.000030 sec
+Total time elapsed: 2.502641 sec
 ```
 
 Finally, benchmarking more common autocomplete prefixes such as 'stupe' returns a similar result to the following example.
 
 ```
 Vocabulary size: 235886
-Completions of stupe: stupe, stupefacient, stupefaction, stupefactive, stupefactiveness, stupefied, stupefiedness, stupefier, stupefy, stupend, stupendly, stupendous, stupendously, stupendousness, stupent, stupeous, stupex
+Number of completions: 16
+Completions of stupe: stupefacient, stupefaction, stupefactive, stupefactiveness, stupefied, stupefiedness, stupefier, stupefy, stupend, stupendly, stupendous, stupendously, stupendousness, stupent, stupeous, stupex
 
-Initial setup time: 0.000005 sec
-Autocomplete time:  0.030520 sec
-Total time elapsed: 0.030525 sec
+Initial setup time: 2.434260 sec
+Autocomplete time:  0.000051 sec
+Total time elapsed: 2.434311 sec
 ```
