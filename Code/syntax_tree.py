@@ -41,7 +41,7 @@ class ASTree():
     
   def create_test_tree(self):
     '''
-    Creates Tree
+    Creates Test Tree
 
          +
         / \
@@ -57,20 +57,31 @@ class ASTree():
     self.root.right.left = ASNode(value="4")
     self.root.right.right = ASNode(value="7")
 
-  def evaluate(self):
+
+  def evaluate(self, node=None):
     '''
-    This method will evaluate the abstract syntax tree and return the calculated value.
+    This method will recursively evaluate an abstract syntax tree and return the calculated value.
     '''
-    pass
+    if node == None:
+      node = self.root
+
+    if node.value is not None:
+      return float(node.value)
+    
+    if node.symbol == "+":
+      return self.evaluate(node.left) + self.evaluate(node.right)
+    elif node.symbol == "-":
+      return self.evaluate(node.left) - self.evaluate(node.right)
+    elif node.symbol == "*":
+      return self.evaluate(node.left) * self.evaluate(node.right)
+    elif node.symbol == "/":
+      return self.evaluate(node.left) / self.evaluate(node.right)
+    
 
   
 class ASNode():
-  def __init__(self, value=None,  symbol=None):
-    if value:
-      self.value = value
-
-    if symbol:
-      self.symbol = value
-
+  def __init__(self, value=None, symbol=None):
+    self.value = value
+    self.symbol = symbol
     self.left = None
     self.right = None  
