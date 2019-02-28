@@ -12,4 +12,4 @@ def test_insert():
   t.parse("23+56*2")
 
   t.parse("2+ 4")
-  assert t.evaluate() == 6
+  assert t.root.symbol == "+"
