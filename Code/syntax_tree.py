@@ -9,11 +9,13 @@ class ASTree():
   
   def parse(self, values):
     '''
-    This function takes a valid string of valid mathematical expressions and builds an Abstract Syntax Tree to evaluate it.
+    This function takes a string with a valid
+    mathematical expression and builds an Abstract 
+    Syntax Tree to evaluate it.
     '''
     #Clear out old Tree
     self.root = None
-
+    print("Parse function")
     valid_operators = {
       "+":True, 
       "-":True, 
@@ -24,12 +26,23 @@ class ASTree():
     values = values.replace(' ', '')
     index = 0
     cur_number = []
-    cur_node = None
 
     while index < len(values):
 
       if values[index] in valid_operators:
-        new_node = ASNode(symbol=values[index])
+
+
+        if self.root == None:
+          self.root = ASNode()
+          self.root.symbol = values[index]
+          self.root.left = ASNode(value="".join(cur_number))
+        
+        else:
+          self.root.right = ASNode(value="".join(cur_number))
+          temp_node = self.root
+          self.root = ASNode(symbol=values[index])
+          self.root.left = temp_node
+
         print("Number: {}".format("".join(cur_number)))
         print("Operator: {}".format(values[index]))
         cur_number = []
@@ -37,7 +50,19 @@ class ASTree():
         cur_number.append(values[index])
       index += 1
       if index == len(values):
-        print("At end of list of values: {}".format("".join(cur_number)))
+        right_node = ASNode(value="".join(cur_number))
+        self.root.right = right_node
+        
+        # if self.root:
+        #   temp_node = self.root
+        #   self.root = cur_node
+        #   self.root.left = temp_node
+        
+        # else:
+        #   self.root = cur_node
+
+        print("At end of list of values: {}"
+          .format("".join(cur_number)))
     
   def create_test_tree(self):
     '''
@@ -49,18 +74,19 @@ class ASTree():
           / \
          4   7
 
-      Should evaluate to 31 and not 49
+    Should evaluate to 31 and not 49
     '''
     self.root = ASNode(symbol = "+")
     self.root.left = ASNode(value="3")
-    self.root.right = ASNode(symbol='*')
+    self.root.right = ASNode(symbol="*")
     self.root.right.left = ASNode(value="4")
     self.root.right.right = ASNode(value="7")
 
 
   def evaluate(self, node=None):
     '''
-    This method will recursively evaluate an abstract syntax tree and return the calculated value.
+    This method will recursively evaluate an abstract
+    syntax tree and return the calculated value.
     '''
     if node == None:
       node = self.root
