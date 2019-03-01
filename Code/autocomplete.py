@@ -3,7 +3,6 @@
 import sys
 import time
 
-
 def get_lines(filename='/usr/share/dict/words'):
     """Return a list of strings on separate lines in the given text file with
     any leading and trailing whitespace characters removed from each line."""
@@ -12,12 +11,10 @@ def get_lines(filename='/usr/share/dict/words'):
         lines = [line.strip() for line in file]
     return lines
 
-
 def generate_prefixes(vocabulary):
     """Return a set of unique prefixes from the given list of strings."""
     # Generate prefixes using the first half of each string
     return set(word[:len(word)//2] for word in vocabulary)
-
 
 def autocomplete_setup(vocabulary, algorithm='linear_search'):
     """Return the main data structure needed to set up autocomplete using the
@@ -30,7 +27,6 @@ def autocomplete_setup(vocabulary, algorithm='linear_search'):
         # Create a trie structure with the vocabulary
         return Trie(vocabulary)
 
-
 def autocomplete(prefix, structure, algorithm='linear_search'):
     """Return all vocabulary entries that start with the given prefix using the
     given structure and algorithm, specified as linear_search, trie, etc."""
@@ -40,7 +36,6 @@ def autocomplete(prefix, structure, algorithm='linear_search'):
     elif algorithm == 'trie':
         # Search the trie structure for the prefix
         return structure.autocomplete(prefix)
-
 
 def main():
     """Read command-line arguments and test autocomplete algorithms."""
@@ -115,7 +110,6 @@ def main():
         print('Initial setup time: {:.6f} sec'.format(setup_time - start_time))
         print('Autocomplete time:  {:.6f} sec'.format(end_time - setup_time))
         print('Total time elapsed: {:.6f} sec'.format(end_time - start_time))
-
 
 if __name__ == '__main__':
     main()
