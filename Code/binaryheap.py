@@ -33,8 +33,9 @@ class BinaryMinHeap(object):
 
     def insert(self, item):
         """Insert the given item into this heap.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(1) when item has a value that is less 
+        than its children.
+        Worst case running time: O(log n) when item is placed at leaf."""
         # Insert the item at the end and bubble up to the root
         self.items.append(item)
         if self.size() > 1:
@@ -50,8 +51,10 @@ class BinaryMinHeap(object):
 
     def delete_min(self):
         """Remove and return the minimum item at the root of this heap.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(log n) removing from the root means 
+        traversing the tree to a leaf node - a log n operation. 
+        Worst case running time: log n in all situations 
+        because the tree is complete it is guaranteed to be log n."""
 
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
@@ -71,9 +74,13 @@ class BinaryMinHeap(object):
     def replace_min(self, item):
         """Remove and return the minimum item at the root of this heap,
         and insert the given item into this heap.
+
         This method is more efficient than calling delete_min and then insert.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(1) if replaced by an item with similar order.
+        Worst case running time: O(log n) when root is replaced by an item that 
+        needs to be placed as a leaf node. 
+
+        This is due to the leaf traversal requiring log n time."""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         assert self.size() > 0
