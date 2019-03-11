@@ -60,7 +60,7 @@ class PriorityQueue(object):
         return self.heap.replace_min(PriorityNode(item, priority))
 
 class PriorityNode(object):
-    def __init__(self, value, priority=None):
+    def __init__(self, value, priority):
         self.value = value
         self.priority = priority
     
@@ -83,4 +83,7 @@ class PriorityNode(object):
             return NotImplemented
     
     def __str__(self):
+        return "Value: {} Priority: {}".format(self.value, self.priority)
+
+    def __repr__(self):
         return "Value: {} Priority: {}".format(self.value, self.priority)
