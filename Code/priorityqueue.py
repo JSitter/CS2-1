@@ -24,28 +24,31 @@ class PriorityQueue(object):
     def length(self):
         """Return the number of items in this priority queue."""
         return self.heap.size()
+    
+    def size(self):
+        return self.length()
 
     def enqueue(self, item, priority):
         """Insert the given item into this priority queue in order according to
         the given priority."""
-        # TODO: Insert given item into heap in order according to given priority
-        # ...
+        # Insert given item into heap in order according to given priority
+        self.heap.insert(PriorityNode(item, priority))
 
     def front(self):
         """Return the item at the front of this priority queue without removing
         it, or None if this priority queue is empty."""
         if self.size() == 0:
             return None
-        # TODO: Return minimum item from heap
-        # ...
+        # Return minimum item from heap
+        return self.heap.get_min()
 
     def dequeue(self):
         """Remove and return the item at the front of this priority queue,
         or raise ValueError if this priority queue is empty."""
         if self.size() == 0:
             raise ValueError('Priority queue is empty and has no front item')
-        # TODO: Remove and return minimum item from heap
-        # ...
+        # Remove and return minimum item from heap
+        return self.heap.delete_min()
 
     def push_pop(self, item, priority):
         """Remove and return the item at the front of this priority queue,
@@ -53,5 +56,31 @@ class PriorityQueue(object):
         This method is more efficient than calling dequeue and then enqueue."""
         if self.size() == 0:
             raise ValueError('Priority queue is empty and has no front item')
-        # TODO: Replace and return minimum item from heap
-        # ...
+        # Replace and return minimum item from heap
+        return self.heap.replace_min(PriorityNode(item, priority))
+
+class PriorityNode(object):
+    def __init__(self, value, priority=None):
+        self.value = value
+        self.priority = priority
+    
+    def __eq__(self, other):
+        if isinstance(other, PriorityNode):
+            return self.priority == other.priority
+        else:
+            return NotImplemented
+    
+    def __lt__(self, other):
+        if isinstance(other, PriorityNode):
+            return self.priority < other.priority
+        else:
+            return NotImplemented
+    
+    def __gt__(self, other):
+        if isinstance(other, PriorityNode):
+            return self.priority > other.priority
+        else:
+            return NotImplemented
+    
+    def __str__(self):
+        return "Value: {} Priority: {}".format(self.value, self.priority)
