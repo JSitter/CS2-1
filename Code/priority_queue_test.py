@@ -19,13 +19,12 @@ def test_multi_enqueue():
   pq = PriorityQueue()
   pq.enqueue(45, 3)
   pq.enqueue(50, 2)
-  pq.enqueue(2, 5)
   pq.enqueue(2, 1)
-
+  pq.enqueue(34, 5)
+  assert pq.heap.items[0].value == 2
   assert pq.dequeue().value == 2
-  print(pq)
   assert pq.dequeue().value == 50
   assert pq.dequeue().value == 45
-  assert pq.dequeue().value == 2
+  assert pq.dequeue().value == 34
 
 
