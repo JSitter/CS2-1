@@ -74,12 +74,10 @@ class BinaryMinHeap(object):
     def replace_min(self, item):
         """Remove and return the minimum item at the root of this heap,
         and insert the given item into this heap.
-
         This method is more efficient than calling delete_min and then insert.
         Best case running time: O(1) if replaced by an item with similar order.
         Worst case running time: O(log n) when root is replaced by an item that 
         needs to be placed as a leaf node. 
-
         This is due to the leaf traversal requiring log n time."""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
