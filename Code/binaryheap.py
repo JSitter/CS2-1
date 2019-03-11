@@ -67,6 +67,7 @@ class BinaryMinHeap(object):
         last_item = self.items.pop()
         self.items[0] = last_item
         if self.size() > 1:
+
             self._bubble_down(0)
 
         return min_item
@@ -104,14 +105,17 @@ class BinaryMinHeap(object):
         # Get the parent's index and value
         parent_index = self._parent_index(index)
         parent_item = self.items[parent_index]
+
         # Swap this item with parent item if values are out of order
         if item < parent_item:
+
             temp = parent_item
             self.items[parent_index] = item
             self.items[index] = temp
 
         # Recursively bubble up again if necessary
         self._bubble_up(parent_index)
+
 
     def _bubble_down(self, index):
         """Ensure the heap ordering property is true below the given index,
@@ -130,11 +134,13 @@ class BinaryMinHeap(object):
         item = self.items[index]
 
         # Determine which child item to compare this node's item to
-        if right_index >= self._last_index():
-            child_index = left_index
+        if right_index > self._last_index():
+            # No right index to compare
 
+            child_index = left_index
         else: 
             if self.items[left_index] < self.items[right_index]:
+
                 child_index = left_index
             else:
                 child_index = right_index
